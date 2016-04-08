@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "ThatsMySpot",
+    "packageName": "com.arhs.cube.thats.my.spot",
+    "packageFolder": "com/arhs/cube/thats/my/spot",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "gulp",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "9517d21471e1bbc199ee9a78f926b987bb4fe997",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
