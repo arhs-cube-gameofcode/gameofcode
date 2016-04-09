@@ -3,6 +3,7 @@ package com.arhs.cube.thats.my.spot.service;
 import com.arhs.cube.thats.my.spot.Application;
 import com.arhs.cube.thats.my.spot.Bus;
 import com.arhs.cube.thats.my.spot.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
+import static org.assertj.core.api.StrictAssertions.assertThat;
 
 /**
  * Created by borellda on 4/9/2016.
@@ -70,5 +74,14 @@ public class GeoServiceTest {
             }
         // wrapper.getData().stream().forEach( bus -> log.info(String.format("Distans is: %d", busService.distFrom(bus.getFeatures())))
         }
+    }
+
+
+    @Test
+    public void getPublicTransportationStationsNearby(){
+        Set<Station2LineWrapper> set = geoService.getPublicTransportationStationsnearby(6112550,49610700,500);
+
+        assertThat(set).isNotNull();
+        assertThat(set.isEmpty()).isFalse();
     }
 }

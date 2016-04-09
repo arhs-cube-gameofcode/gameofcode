@@ -10,9 +10,21 @@ angular.module('thatsmyspotApp')
             $scope.criteria = {};
             $scope.$watch('criteria.location', function(newValue, oldValue) {
                 if(newValue) {
-                	$http.get('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + newValue).then(function(response) {
+                	$http.get('http://nominatim.openstreetmap.org/search?format=json&limit=20&q=' + newValue).then(function(response) {
                         console.debug(response.data);
                         $scope.searchRes = response.data;
+
+                        if($scope.searchRes.length == 1) {
+                            $scope.criteria.location = $scope.searchRes[0].display_name;
+                            $scope.chooseAddr($scope.searchRes[0]);
+                        }
+
+                        $scope.searchResDisplay = angular.copy($scope.searchRes);
+
+                        if($scope.searchRes.length > 10) {
+                            $scope.searchResDisplay.length = 10;
+
+                        }
                 	});
                 }
             });
@@ -64,7 +76,14 @@ angular.module('thatsmyspotApp')
                 }
             });
 
-            $scope.chooseAddr = function(lat, lng){
+            $scope.chooseAddr = function(value){
+                var lat = value.lat;
+                var lng = value.lon;
+
+                //Update search criteria
+                $scope.criteria.location = value.display_name;
+                $scope.searchRes = [];
+
             	  var location = new L.LatLng(lat, lng);
             	  map.panTo(location);
 

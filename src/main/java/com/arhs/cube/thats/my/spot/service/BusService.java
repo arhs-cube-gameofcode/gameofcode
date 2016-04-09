@@ -2,9 +2,11 @@ package com.arhs.cube.thats.my.spot.service;
 
 import com.arhs.cube.thats.my.spot.Bus;
 import com.arhs.cube.thats.my.spot.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.GeoJsonObject;
 import org.geojson.LngLatAlt;
 import org.hibernate.internal.util.collections.ConcurrentReferenceHashMap;
+import org.hibernate.service.spi.InjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -15,7 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import javax.inject.Inject;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by borellda on 4/9/2016.
@@ -29,6 +33,9 @@ public class BusService {
     private static final String BUSLINESURL = new String("http://opendata.vdl.lu/odaweb/index.jsp?describe=1");
 
     private static final String BUSSTOPS = new String("http://opendata.vdl.lu/odaweb/?cat=%s");
+
+    @Inject
+    private GeoService geoService;
 
 
     public BussWrapper callBusLines(){
@@ -61,5 +68,22 @@ public class BusService {
     }
 
 
+    public void findNearestPublicTransportStation(Number latitude, Number longtitude, Number maxDistance){
+
+        Set<Station2LineWrapper> wrappers = geoService.getPublicTransportationStationsnearby(latitude.intValue(),longtitude.intValue(),maxDistance.intValue());
+
+        double distance = Double.MAX_VALUE;
+        Station2LineWrapper nearest = null;
+        for (Station2LineWrapper wrapper : wrappers){
+            double result = geoService.distFrom(latitude.doubleValue(),longtitude.doubleValue(),wrapper.getX_coord(), wrapper.getY_coord());
+            if(result < distance) {
+                distance = result;
+                nearest = wrapper;
+            }
+        }
+
+
+
+    }
 
 }
