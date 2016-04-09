@@ -22,6 +22,12 @@
                                                   class="form-control"
                                                   placeholder="{{'main.criteria.location' | translate}}"/>
                     </div>
+  					<div id="results">
+  						<ul>
+  						   <li ng-repeat="(key, value) in searchRes"><a href='#' ng-click="chooseAddr(value.lat, value.lon)">{{value.display_name}}</a></li>
+    					</ul>
+    
+  					</div>
                 </div>
             </div>
             <div class="form-group">
