@@ -1,12 +1,9 @@
 package com.arhs.cube.thats.my.spot.service;
 
-import com.arhs.cube.thats.my.spot.Bus;
-import com.arhs.cube.thats.my.spot.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.Bus;
+import com.arhs.cube.thats.my.spot.service.util.BussWrapper;
 import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.GeoJsonObject;
-import org.geojson.LngLatAlt;
-import org.hibernate.internal.util.collections.ConcurrentReferenceHashMap;
-import org.hibernate.service.spi.InjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -18,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
-import java.util.Optional;
 import java.util.Set;
 
 /**
