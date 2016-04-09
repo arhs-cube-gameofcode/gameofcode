@@ -1,15 +1,19 @@
 'use strict';
 
 angular.module('thatsmyspotApp')
-    .controller('MainController', function ($scope, Principal) {
+    .controller('MainController', function ($scope, Principal, $http) {
         Principal.identity().then(function(account) {
+        	$scope.searchRes={};
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
             // Criteria
             $scope.criteria = {};
             $scope.$watch('criteria.location', function(newValue, oldValue) {
                 if(newValue) {
-                    //TODO call the map centering function.
+                	$http.get('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + newValue).then(function(response) {
+                        console.debug(response.data);
+                        $scope.searchRes = response.data;
+                	});
                 }
             });
             $scope.services = [{
@@ -22,7 +26,14 @@ angular.module('thatsmyspotApp')
                     //TODO call the map service changing function
                 }
             });
-
+            
+            $scope.chooseAddr = function(lat, lng){
+            	  var location = new L.LatLng(lat, lng);
+            	  map.panTo(location);
+            	  
+            	  map.setZoom(50);
+            }
+            
             // Map
             var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
                 attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
