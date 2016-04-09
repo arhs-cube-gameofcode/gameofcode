@@ -17,7 +17,7 @@ public class TestRest {
 	public static void main(String args[]){
 
 		RestTemplate restTemplate = new RestTemplate();
-	
+
 		String fooResourceUrl = "http://opendata.vdl.lu/odaweb/index.jsp?describe=1";
 
 		HttpHeaders headers = new HttpHeaders();
@@ -25,22 +25,22 @@ public class TestRest {
 
 		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 		ResponseEntity<BussWrapper> response = restTemplate.exchange(fooResourceUrl, HttpMethod.GET, entity, BussWrapper.class);
-		
-		/*ResponseEntity<String> response = 
+        //Data quote = restTemplate.getForObject(fooResourceUrl, Data.class,);
+		/*ResponseEntity<String> response =
 				  restTemplate.getForEntity(fooResourceUrl, String.class);*/
 
-		
-		
-		System.out.println(response.getBody());
+
+
+		//System.out.println(response.getBody());
 		System.out.println("-----------");
-		
+
 
 	}
-	
+
 	private static void sendGet() throws Exception {
 
 		String url = "http://opendata.vdl.lu/odaweb/index.jsp?describe=1";
-		
+
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -68,5 +68,5 @@ public class TestRest {
 		System.out.println(response.toString());
 
 	}
-	
+
 }
