@@ -1,16 +1,24 @@
 package com.arhs.cube.thats.my.spot.service;
 
 import com.arhs.cube.thats.my.spot.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.CsvParser;
+import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.LngLatAlt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * Created by borellda on 4/9/2016.
@@ -20,6 +28,8 @@ import org.springframework.web.client.RestTemplate;
 public class GeoService {
     /* The Logger */
     private final Logger log = LoggerFactory.getLogger(GeoService.class);
+
+    private final static String NEARBYSTATIONURL = new String("http://travelplanner.mobiliteit.lu/hafas/query.exe/dot");
 
     public double distFrom(LngLatAlt firstCoord, LngLatAlt secondCoordinate){
         return distFrom(firstCoord.getLatitude(),firstCoord.getLongitude(),secondCoordinate.getLatitude(),secondCoordinate.getLongitude());
@@ -38,17 +48,44 @@ public class GeoService {
         return dist;
     }
 
-    public void getPublicTransportationStationsnearby(double latitude, double longtitude, double maxDistance){
+    public Set<Station2LineWrapper> getPublicTransportationStationsnearby(int latitude, int longtitude, int maxDistance){
 
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("User-Agent", "Mozilla/5.0");
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<BussWrapper> response = restTemplate.exchange("", HttpMethod.GET, entity, BussWrapper.class);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(NEARBYSTATIONURL)
+            .queryParam("look_maxdist", maxDistance)
+            .queryParam("look_x", latitude)
+            .queryParam("look_y", longtitude)
+            .queryParam("performLocating", 2)
+            .queryParam("tpl", "stop2csv")
+            .queryParam("stationProxy", "yes");
 
+        HttpEntity<?> entity = new HttpEntity<>(headers);
 
+        HttpEntity<String> response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, String.class);
+
+        log.info(String.format("Result :%S", response.getBody()));
+        Set<Station2LineWrapper> set = new HashSet<>();
+        CsvParser parser = new CsvParser();
+        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+        for (String line: parser.lineSplitter(response.getBody(),System.getProperty("line.separator"))) {
+            double x_coord = 0.0;
+            double y_coord = 0.0;
+            try {
+                for (String column : parser.lineSplitter(line, "@")) {
+                    x_coord = column.contains("X") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
+                    y_coord = column.contains("Y") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
+                }
+            } catch (ParseException e) {
+                log.error(e.getMessage(),e);
+            }
+            Station2LineWrapper wrapper = new Station2LineWrapper(line,x_coord,y_coord);
+            set.add(wrapper);
+        }
+        return set;
     }
 
 }
