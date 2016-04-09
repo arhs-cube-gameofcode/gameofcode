@@ -35,8 +35,8 @@ public class BusService {
     @Inject
     private GeoService geoService;
 
-    @Inject
-    private PublicTransportationStation stationService;
+    //@Inject
+    //private PublicTransportationStation stationService;
 
 
     public BussWrapper callBusLines(){
