@@ -91,7 +91,16 @@ angular.module('thatsmyspotApp')
             	  map.panTo(location);
 
             	  map.setZoom(50);
-            }
+            };
+
+            // Criteria distance
+            $scope.$watch('criteria.distance', function(newValue, oldValue) {
+                if(newValue) {
+                    //TODO set distance
+                } else {
+                    //TODO no distance
+                }
+            });
 
             // Map
             var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
