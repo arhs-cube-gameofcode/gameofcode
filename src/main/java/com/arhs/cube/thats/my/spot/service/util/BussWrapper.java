@@ -1,4 +1,4 @@
-package com.arhs.cube.thats.my.spot;
+package com.arhs.cube.thats.my.spot.service.util;
 
 import java.util.List;
 

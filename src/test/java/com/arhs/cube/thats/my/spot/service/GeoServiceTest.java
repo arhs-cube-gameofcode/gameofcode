@@ -1,8 +1,8 @@
 package com.arhs.cube.thats.my.spot.service;
 
 import com.arhs.cube.thats.my.spot.Application;
-import com.arhs.cube.thats.my.spot.Bus;
-import com.arhs.cube.thats.my.spot.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.Bus;
+import com.arhs.cube.thats.my.spot.service.util.BussWrapper;
 import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.*;
 import org.junit.Test;
@@ -84,4 +84,7 @@ public class GeoServiceTest {
         assertThat(set).isNotNull();
         assertThat(set.isEmpty()).isFalse();
     }
+
+
+
 }

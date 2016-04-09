@@ -1,4 +1,4 @@
-package com.arhs.cube.thats.my.spot;
+package com.arhs.cube.thats.my.spot.service.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.geojson.GeoJsonObject;

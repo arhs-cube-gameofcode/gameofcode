@@ -1,9 +1,8 @@
 package com.arhs.cube.thats.my.spot.service;
 
 import com.arhs.cube.thats.my.spot.Application;
-import com.arhs.cube.thats.my.spot.Bus;
-import com.arhs.cube.thats.my.spot.BussWrapper;
-import org.geojson.*;
+import com.arhs.cube.thats.my.spot.service.util.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,8 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
@@ -33,6 +31,9 @@ public class BusServiceTest {
 
     @Inject
     private BusService busService;
+
+    @Inject
+    private PublicTransportationStation stationService;
 
     @Test
     public void busestest(){
@@ -57,7 +58,13 @@ public class BusServiceTest {
 
 
     }
+     @Test
+     public void findNearestStation (){
+        Station2LineWrapper station = busService.findNearestPublicTransportStation(6112550,49610700,500);
+         assertThat(station).isNotNull();
 
+         stationService.getBusLine4Station(station);
+     }
 
 
 }
