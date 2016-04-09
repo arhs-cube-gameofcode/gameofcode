@@ -2,6 +2,7 @@ package com.arhs.cube.thats.my.spot.service;
 
 import com.arhs.cube.thats.my.spot.service.util.Bus;
 import com.arhs.cube.thats.my.spot.service.util.BussWrapper;
+import com.arhs.cube.thats.my.spot.service.util.CoordinateUtils;
 import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.GeoJsonObject;
 import org.slf4j.Logger;
@@ -27,9 +28,9 @@ public class BusService {
     /* The Logger */
     private final Logger log = LoggerFactory.getLogger(BusService.class);
 
-    private static final String BUSLINESURL = new String("http://opendata.vdl.lu/odaweb/index.jsp?describe=1");
+    private static final String BUSLINESURL = "http://opendata.vdl.lu/odaweb/index.jsp?describe=1";
 
-    private static final String BUSSTOPS = new String("http://opendata.vdl.lu/odaweb/?cat=%s");
+    private static final String BUSSTOPS = "http://opendata.vdl.lu/odaweb/?cat=%s";
 
     @Inject
     private GeoService geoService;
@@ -44,12 +45,12 @@ public class BusService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "Mozilla/5.0");
 
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<BussWrapper> response = restTemplate.exchange(BUSLINESURL, HttpMethod.GET, entity, BussWrapper.class);
 
         //response.getBody().getData().stream().forEach( bus -> callBusTrackGeoJson(bus));
 
-        return  response.getBody();
+        return CoordinateUtils.computeBusWrapperCoordinateToRealOne(response.getBody());
 
     }
 
@@ -60,7 +61,7 @@ public class BusService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", "Mozilla/5.0");
 
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<GeoJsonObject> response = restTemplate.exchange(String.format(BUSSTOPS,bus.getId()), HttpMethod.GET, entity, GeoJsonObject.class);
         bus.setFeatures(response.getBody());
 

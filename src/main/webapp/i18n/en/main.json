@@ -19,7 +19,8 @@
         "criteria": {
             "location": "Location",
             "service": "Service",
-            "tooMuchResult": "There is a lot more results, you should refine your criteria."
+            "tooMuchResult": "There is a lot more results, you should refine your criteria.",
+            "distance": "Distance to the service"
         }
     }
 }
