@@ -13,8 +13,11 @@
                     translate="main.criteria.location">location</label></div>
             </div>
             <div class="row">
-                <div class="col-md-12"><input id="criteria-location" type="text" ng-model="criteria.location"
-                    class="form-control" placeholder="{{'main.criteria.location' | translate}}"/></div>
+                <div class="col-md-12"><input id="criteria-location" type="text"
+                                              ng-model="criteria.location"
+                                              ng-model-options="{ updateOn: 'blur' }"
+                                              class="form-control"
+                                              placeholder="{{'main.criteria.location' | translate}}"/></div>
             </div>
         </div>
         <div class="col-md-8">
