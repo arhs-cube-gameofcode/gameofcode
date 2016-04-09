@@ -1,6 +1,5 @@
 package com.arhs.cube.thats.my.spot.service;
 
-import com.arhs.cube.thats.my.spot.BussWrapper;
 import com.arhs.cube.thats.my.spot.service.util.CsvParser;
 import com.arhs.cube.thats.my.spot.service.util.Station2LineWrapper;
 import org.geojson.LngLatAlt;
@@ -12,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.BufferedReader;
-import java.io.StringReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashSet;
