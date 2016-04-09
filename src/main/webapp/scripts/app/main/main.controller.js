@@ -17,7 +17,7 @@ angular.module('thatsmyspotApp')
                 attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
             var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attr_osm, attr_overpass].join(', ')});
 
-            var map = new L.Map('mapid').addLayer(osm).setView(new L.LatLng(52.265, 10.524), 14);
+            var map = new L.Map('mapid').addLayer(osm).setView(new L.LatLng(49.61134, 6.13917), 12);
 
         //OverPassAPI overlay
             var opl = new L.OverPassLayer({
