@@ -1,11 +1,7 @@
 package com.arhs.cube.thats.my.spot.service.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.geojson.Crs;
-import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
-
-import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Bus {
