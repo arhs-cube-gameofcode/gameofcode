@@ -6,11 +6,14 @@ angular.module('thatsmyspotApp')
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
             // Criteria
+            $scope.criteria = {};
             $scope.$watch('criteria.location', function(newValue, oldValue) {
                 if(newValue) {
                     //TODO call the map centering function.
                 }
             });
+            $scope.services = ['Hotel'];
+            $scope.criteria.service = $scope.services[0];
 
             // Map
             var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
