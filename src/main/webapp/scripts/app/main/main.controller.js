@@ -12,8 +12,11 @@ angular.module('thatsmyspotApp')
                     //TODO call the map centering function.
                 }
             });
-            $scope.services = ['Hotel'];
-            $scope.criteria.service = $scope.services[0];
+            $scope.services = [{
+                key: 'tourism:hotel',
+                label: 'Hotel'
+            }];
+            $scope.criteria.service = $scope.services[0].key;
             $scope.$watch('criteria.service', function(newValue, oldValue) {
                 if(newValue) {
                     //TODO call the map service changing function
