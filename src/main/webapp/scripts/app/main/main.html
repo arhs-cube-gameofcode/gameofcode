@@ -22,11 +22,16 @@
                                                   class="form-control"
                                                   placeholder="{{'main.criteria.location' | translate}}"/>
                     </div>
-  					<div id="results">
-  						<ul>
-  						   <li ng-repeat="(key, value) in searchRes"><a href='#' ng-click="chooseAddr(value.lat, value.lon)">{{value.display_name}}</a></li>
+  					<div id="results" ng-show="searchRes.length > 1">
+  						<ul class="location-result-list-wrapper">
+                            <li ng-repeat="(key, value) in searchResDisplay" class="location-result-list">
+                                <a href='' ng-click="chooseAddr(value, value)">{{value.display_name}}</a>
+                            </li>
+                            <li ng-show="searchRes.length > 10" class="location-result-list">
+                                <span translate="main.criteria.tooMuchResult">there is a lot more results, you should refine your criteria.</span>
+                            </li>
     					</ul>
-    
+
   					</div>
                 </div>
             </div>

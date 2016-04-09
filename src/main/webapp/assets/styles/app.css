@@ -1,3 +1,13 @@
 #mapid {
     height: 725px;
 }
+
+.location-result-list {
+    list-style-type: none;
+    border-bottom: thin dashed #009688;
+    margin-bottom: .5em;
+}
+
+.location-result-list-wrapper {
+    padding-left: 1em;
+}

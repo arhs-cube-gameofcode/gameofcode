@@ -18,7 +18,8 @@
 
         "criteria": {
             "location": "Location",
-            "service": "Service"
+            "service": "Service",
+            "tooMuchResult": "There is a lot more results, you should refine your criteria."
         }
     }
 }
