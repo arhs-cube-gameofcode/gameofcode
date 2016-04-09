@@ -1,0 +1,22 @@
+{
+    "thatsmyspotApp": {
+        "route" : {
+            "home": {
+                "title": "Routes",
+                "createLabel": "Créer un nouveau Route",
+                "createOrEditLabel": "Créer ou éditer un Route",
+                "search": "Search for Route"
+            },
+            "created": "Un nouveau Route a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Route avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Route avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Route {{ id }} ?"
+            },
+            "detail": {
+                "title": "Route"
+            }
+        }
+    }
+}
+
