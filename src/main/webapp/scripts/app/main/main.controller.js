@@ -14,6 +14,11 @@ angular.module('thatsmyspotApp')
             });
             $scope.services = ['Hotel'];
             $scope.criteria.service = $scope.services[0];
+            $scope.$watch('criteria.service', function(newValue, oldValue) {
+                if(newValue) {
+                    //TODO call the map service changing function
+                }
+            });
 
             // Map
             var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',

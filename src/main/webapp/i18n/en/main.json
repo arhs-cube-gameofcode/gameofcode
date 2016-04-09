@@ -17,7 +17,8 @@
         "github": "Github",
 
         "criteria": {
-            "location": "Location"
+            "location": "Location",
+            "service": "Service"
         }
     }
 }
