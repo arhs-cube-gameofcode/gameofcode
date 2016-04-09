@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
+import javax.persistence.Index;
 import java.util.Set;
 
 /**
@@ -32,6 +33,9 @@ public class BusService {
 
     @Inject
     private GeoService geoService;
+
+    @Inject
+    private PublicTransportationStation stationService;
 
 
     public BussWrapper callBusLines(){
@@ -64,7 +68,7 @@ public class BusService {
     }
 
 
-    public void findNearestPublicTransportStation(Number latitude, Number longtitude, Number maxDistance){
+    public Station2LineWrapper findNearestPublicTransportStation(Number latitude, Number longtitude, Number maxDistance){
 
         Set<Station2LineWrapper> wrappers = geoService.getPublicTransportationStationsnearby(latitude.intValue(),longtitude.intValue(),maxDistance.intValue());
 
@@ -77,7 +81,7 @@ public class BusService {
                 nearest = wrapper;
             }
         }
-
+        return nearest;
 
 
     }

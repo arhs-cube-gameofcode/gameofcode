@@ -68,13 +68,13 @@ public class GeoService {
         Set<Station2LineWrapper> set = new HashSet<>();
         CsvParser parser = new CsvParser();
         NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
-        for (String line: parser.lineSplitter(response.getBody(),System.getProperty("line.separator"))) {
+        for (String line: parser.lineSplitter(response.getBody(),"\n")) {
             double x_coord = 0.0;
             double y_coord = 0.0;
             try {
                 for (String column : parser.lineSplitter(line, "@")) {
-                    x_coord = column.contains("X") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
-                    y_coord = column.contains("Y") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
+                    x_coord = column.contains("X=") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
+                    y_coord = column.contains("Y=") ? format.parse(column.split("=")[1]).doubleValue(): 0.0;
                 }
             } catch (ParseException e) {
                 log.error(e.getMessage(),e);
