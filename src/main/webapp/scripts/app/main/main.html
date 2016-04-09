@@ -26,7 +26,7 @@
   					<div id="results" ng-show="searchRes.length > 1">
   						<ul class="location-result-list-wrapper">
                             <li ng-repeat="(key, value) in searchResDisplay" class="location-result-list">
-                                <a href='' ng-click="chooseAddr(value, value)">{{value.display_name}}</a>
+                                <a href='' ng-click="chooseAddr(value)">{{value.display_name}}</a>
                             </li>
                             <li ng-show="searchRes.length > 10" class="location-result-list">
                                 <span translate="main.criteria.tooMuchResult">there is a lot more results, you should refine your criteria.</span>
