@@ -26,6 +26,9 @@ angular.module('thatsmyspotApp')
 
                         }
                 	});
+                } else {
+                    $scope.searchRes = [];
+                    $scope.searchResDisplay = [];
                 }
             });
             $scope.services = [
