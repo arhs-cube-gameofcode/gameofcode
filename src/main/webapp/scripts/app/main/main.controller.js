@@ -126,7 +126,7 @@ angular.module('thatsmyspotApp')
                 		  bussLine.stations.forEach(function(station){
                 			  var diff = $scope.getDistanceFromLatLonInKm(lat, lng, station.lat, station.lng) * 1000;
                 			  //make 300 configurable
-                			  if(diff < 200){
+                			  if(diff < 250){
                 				  console.log(station);
                 				  L.marker(new L.LatLng(station.lat, station.lng), {
                 				        icon: $scope.north
