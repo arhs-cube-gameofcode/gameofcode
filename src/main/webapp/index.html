@@ -7,17 +7,17 @@
         <meta name="description" content="">
         <meta name="google" value="notranslate">
         <meta name="viewport" content="width=device-width">
-        <link rel="icon" href="favicon.ico?v=2" />
+        <link rel="icon" href="favicon.ico?v=2">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css assets/styles/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css" />
-        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
-        <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-        <link rel="stylesheet" href="bower_components/leaflet-layer-overpass/dist/OverPassLayer.css" />
-        <link rel="stylesheet" href="assets/styles/app.css" />
+        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
+        <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css">
+        <link rel="stylesheet" href="bower_components/leaflet-layer-overpass/dist/OverPassLayer.css">
+        <link rel="stylesheet" href="assets/styles/app.css">
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css assets/styles/main.css -->
@@ -28,13 +28,25 @@
         <!--[if lt IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
+        <div ng-show="{{ENV === &apos;dev&apos;}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
             <div class="well" ui-view="content"></div>
 
             <div class="footer">
                 <p translate="footer">Arhs-Cube</p>
+                <div ng-controller="BootswatchController" id="bootswatch-theme-switcher" uib-dropdown="" class="dropup pull-right">
+                    <a class="btn btn-default dropdown-toggle" uib-dropdown-toggle="">
+                        <span class="glyphicon glyphicon-adjust"></span>
+                        <span class="hidden-tablet" translate="bootswatch.themeSelector">Theme</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" uib-dropdown-menu="">
+                        <li class="theme-link" ng-repeat="theme in themes">
+                            <a href="" jh-switch-theme="theme">{{theme.name}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
